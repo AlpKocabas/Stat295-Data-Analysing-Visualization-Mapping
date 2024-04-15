@@ -8,8 +8,16 @@ editor_options:
     wrap: 72
 ---
 
-## merhaba 
+## Question 1
 
+<<<<<<< HEAD
 ben Alp deneme yapıyorum.
 
 ben Efe deneme yapıyorum 
+=======
+## Question 2
+
+## Question 3
+
+## Question 4 
+>>>>>>> ad747b209f86158d9af7aedc66e06f8f642d7fec
