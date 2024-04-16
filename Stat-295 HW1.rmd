@@ -10,11 +10,39 @@ editor_options:
 
 ## Question 1
 
+Codes for Linux
+
+-   **To work on a file.**
+
+    #cd C:/Users/kocab/Desktop/Stat_295_HW1
+
+```{=html}
+<!-- -->
+```
+-   **To read the data.**
+
+    #wget --content-disposition
+    <https://raw.githubusercontent.com/dhavalpotdar/College-Scorecard-Data-Analysis/master/MERGED_2017_2018_cleaned.csv>
+
+-   **To change the name of data set.**
+
+    #mv MERGED_2017_2018_cleaned.csv college_score.csv
+
+-   **To print the lines 10 through 60.**
+
+    #head -n 60 college_score.csv \| tail -n 51
+
+-   **To create sub-sample of data set with appropriate conditions.**
+
+    #grep "Public" college_score.csv \| grep ",Montgomery," \>
+    subsample.csv
+
+-   **To obtain the frequencies of each cities.**
+
+    #cut -d ',' -f2 subsample.csv \| sort \| uniq -c
+
 ## Question 2
 
 ## Question 3
 
-## Question 4 
-
-
-
+## Question 4

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Sabahattin Alp Kocabaş, Başak Kabaloğlu, Efe Örencik" />
 
-<meta name="date" content="2024-04-15" />
+<meta name="date" content="2024-04-16" />
 
 <title>Stat-295 HW1</title>
 
@@ -353,13 +353,33 @@ display: none;
 <h1 class="title toc-ignore">Stat-295 HW1</h1>
 <h4 class="author">Sabahattin Alp Kocabaş, Başak Kabaloğlu, Efe
 Örencik</h4>
-<h4 class="date">2024-04-15</h4>
+<h4 class="date">2024-04-16</h4>
 
 </div>
 
 
 <div id="question-1" class="section level2">
 <h2>Question 1</h2>
+<p>Codes for Linux</p>
+<ul>
+<li><p><strong>To work on a file.</strong></p>
+<p>#cd C:/Users/kocab/Desktop/Stat_295_HW1</p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p><strong>To read the data.</strong></p>
+<p>#wget –content-disposition <a href="https://raw.githubusercontent.com/dhavalpotdar/College-Scorecard-Data-Analysis/master/MERGED_2017_2018_cleaned.csv" class="uri">https://raw.githubusercontent.com/dhavalpotdar/College-Scorecard-Data-Analysis/master/MERGED_2017_2018_cleaned.csv</a></p></li>
+<li><p><strong>To change the name of data set.</strong></p>
+<p>#mv MERGED_2017_2018_cleaned.csv college_score.csv</p></li>
+<li><p><strong>To print the lines 10 through 60.</strong></p>
+<p>#head -n 60 college_score.csv | tail -n 51</p></li>
+<li><p><strong>To create sub-sample of data set with appropriate
+conditions.</strong></p>
+<p>#grep “Public” college_score.csv | grep “,Montgomery,” &gt;
+subsample.csv</p></li>
+<li><p><strong>To obtain the frequencies of each cities.</strong></p>
+<p>#cut -d ‘,’ -f2 subsample.csv | sort | uniq -c</p></li>
+</ul>
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2</h2>
