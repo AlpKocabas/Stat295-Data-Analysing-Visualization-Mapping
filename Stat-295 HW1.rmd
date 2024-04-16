@@ -16,9 +16,6 @@ Codes for Linux
 
     #cd C:/Users/kocab/Desktop/Stat_295_HW1
 
-```{=html}
-<!-- -->
-```
 -   **To read the data.**
 
     #wget --content-disposition
