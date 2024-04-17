@@ -57,7 +57,7 @@ Codes for Linux
 
 -   **Head of obtained frequencies of each cities.**
 
-    ![](images/head of obtained frequencies.png){width="590"}
+    ![](images/head%20of%20obtained%20frequencies.png){width="590"}
 
 # Question 2
 
