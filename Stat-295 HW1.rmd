@@ -54,9 +54,11 @@ Codes for Linux
 -   **For print the lines 10 through 60.**
 
     ![lines 10 through
-    60.](images/output for obtain 10 to 60 .png){width="650"}
+    60.](images/output%20for%20obtain%2010%20to%2060%20.png){width="650"}
 
 -   **For obtain the frequencies**
+
+    head ekle !!
 
 # Question 2
 
