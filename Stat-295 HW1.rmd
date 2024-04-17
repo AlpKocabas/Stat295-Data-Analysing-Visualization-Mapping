@@ -51,14 +51,13 @@ Codes for Linux
 
 ## Outputs for 1
 
--   **For print the lines 10 through 60.**
+-   **The lines 10 through 60.**
 
-    ![lines 10 through
-    60.](images/output%20for%20obtain%2010%20to%2060%20.png){width="650"}
+    ![](images/output%20for%20obtain%2010%20to%2060%20.png){width="650"}
 
--   **For obtain the frequencies**
+-   **Head of obtained frequencies of each cities.**
 
-    head ekle !!
+    ![](images/head of obtained frequencies.png){width="590"}
 
 # Question 2
 
