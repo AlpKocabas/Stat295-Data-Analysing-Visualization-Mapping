@@ -8,7 +8,7 @@ editor_options:
     wrap: 72
 ---
 
-## Question 1
+# Question 1
 
 Codes for Linux
 
@@ -38,7 +38,7 @@ Codes for Linux
 
     #cut -d ',' -f2 subsample.csv \| sort \| uniq -c
 
-## Outputs for 1 
+## Outputs for 1
 
 -   **For print the lines 10 through 60.**
 
@@ -159,7 +159,6 @@ Codes for Linux
     102429,Bevill State Community
     College,Jasper,AL,1,Associate's,Associate's,Public,No,2122.0,6476.0,,,,,,,,3029.0,0.2283,0.0,
 
-
 -   **For obtain the frequencies**
 
     1 Alabama State University
@@ -170,8 +169,8 @@ Codes for Linux
 
     1 Troy University-Montgomery Campus
 
-## Question 2
+# Question 2
 
-## Question 3
+# Question 3
 
 # Question 4
