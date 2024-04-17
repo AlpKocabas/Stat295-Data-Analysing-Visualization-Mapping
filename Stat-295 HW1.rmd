@@ -14,160 +14,49 @@ Codes for Linux
 
 -   **To work on a file.**
 
+    ```{r}
     #cd C:/Users/kocab/Desktop/Stat_295_HW1
+
+    ```
 
 -   **To read the data.**
 
-    #wget --content-disposition
-    <https://raw.githubusercontent.com/dhavalpotdar/College-Scorecard-Data-Analysis/master/MERGED_2017_2018_cleaned.csv>
+    ```{r}
+    #wget --content-disposition https://raw.githubusercontent.com/dhavalpotdar/College-Scorecard-Data-Analysis/master/MERGED_2017_2018_cleaned.csv
+    ```
 
 -   **To change the name of data set.**
 
+    ```{r}
     #mv MERGED_2017_2018_cleaned.csv college_score.csv
+    ```
 
 -   **To print the lines 10 through 60.**
 
-    #head -n 60 college_score.csv \| tail -n 51
+    ```{r}
+    #head -n 60 college_score.csv | tail -n 51
+    ```
 
 -   **To create sub-sample of data set with appropriate conditions.**
 
-    #grep "Public" college_score.csv \| grep ",Montgomery," \>
-    subsample.csv
+    ```{r}
+    #grep "Public" college_score.csv | grep ",Montgomery," > subsample.csv
+    ```
 
 -   **To obtain the frequencies of each cities.**
 
-    #cut -d ',' -f2 subsample.csv \| sort \| uniq -c
+    ```{r}
+    #cut -d ',' -f2 college_score.csv | sort | uniq -c
+    ```
 
 ## Outputs for 1
 
 -   **For print the lines 10 through 60.**
 
-    100830,Auburn University at
-    Montgomery,Montgomery,AL,1,Graduate's,Bachelor's,Public,No,8709.0,7518.0,0.8253839935327401,490.0,565.0,475.0,545.0,19.0,24.0,4211.0,0.2244,0.5769,0.115
-    100858,Auburn
-    University,Auburn,AL,1,Graduate's,Bachelor's,Public,No,15479.0,10137.0,0.83930942895086,570.0,650.0,560.0,660.0,24.0,30.0,23391.0,0.0377,0.3198,0.03
-    100937,Birmingham Southern
-    College,Birmingham,AL,1,Bachelor's,Bachelor's,Private
-    Nonprofit,No,10088.0,7774.0,0.61860101602188,520.0,630.0,510.0,630.0,23.0,29.0,1283.0,0.0133,0.4467,0.066
-    101028,Chattahoochee Valley Community College,Phenix
-    City,AL,1,Associate's,Associate's,Public,No,2035.0,5961.0,,,,,,,,1370.0,0.3574,0.2271,0.133
-    101073,Concordia College
-    Alabama,Selma,AL,1,Bachelor's,Associate's,Private
-    Nonprofit,No,5301.0,5409.0,,,,,,,,389.0,0.2288,0.8118, 101116,South
-    University-Montgomery,Montgomery,AL,15,Graduate's,Bachelor's,Private
-    For-Profit,No,16005.0,4830.0,,,,,,,,369.0,0.6206,0.6726,0.145
-    101143,Enterprise State Community
-    College,Enterprise,AL,1,Associate's,Associate's,Public,No,2606.0,6337.0,,,,,,,,1365.0,0.2402,0.1647,0.209
-    101161,Coastal Alabama Community College,Bay
-    Minette,AL,3,Associate's,Associate's,Public,No,1949.0,5932.0,,,,,,,,4101.0,0.2262,0.4446,0.185
-    101189,Faulkner
-    University,Montgomery,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,11037.0,5702.0,0.51006423982869,460.0,590.0,460.0,560.0,18.0,22.0,2272.0,0.4188,0.6469,0.122
-    101240,Gadsden State Community
-    College,Gadsden,AL,1,Associate's,Certificate,Public,No,1789.0,6236.0,,,,,,,,4349.0,0.2926,0.0,
-    101277,New Beginning College of
-    Cosmetology,Albertville,AL,1,Certificate,Certificate,Private
-    For-Profit,No,7119.0,,,,,,,,,83.0,0.4217,0.3305,0.047 101286,George
-    C Wallace Community
-    College-Dothan,Dothan,AL,1,Associate's,Associate's,Public,No,2313.0,5866.0,,,,,,,,3836.0,0.3053,0.0,
-    101295,George C Wallace State Community
-    College-Hanceville,Hanceville,AL,1,Associate's,Associate's,Public,No,2962.0,5790.0,,,,,,,,4805.0,0.2541,0.3243,0.154
-    101301,George C Wallace State Community
-    College-Selma,Selma,AL,1,Associate's,Associate's,Public,No,1279.0,4775.0,,,,,,,,1217.0,0.2345,0.0,
-    101365,Herzing
-    University-Birmingham,Birmingham,AL,11,Graduate's,Certificate,Private
-    Nonprofit,No,10525.0,5360.0,0.7940828402366801,,,,,,,537.0,0.7598,0.7692,0.136
-    101435,Huntingdon
-    College,Montgomery,AL,1,Bachelor's,Bachelor's,Private
-    Nonprofit,No,11118.0,6851.0,0.55978784956605,490.0,595.0,500.0,580.0,19.0,24.0,1099.0,0.1833,0.7064,0.10800000000000001
-    101453,Heritage Christian
-    University,Florence,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,10311.0,4812.0,1.0,,,,,19.0,21.0,59.0,0.5085,0.2,0.166
-    101462,J. F. Drake State Community and Technical
-    College,Huntsville,AL,1,Associate's,Certificate,Public,No,1785.0,5981.0,,,,,,,,685.0,0.5,0.0,
-    101471,J F Ingram State Technical
-    College,Deatsville,AL,1,Certificate,Certificate,Public,No,32.0,5623.0,,,,,,,,449.0,0.8285,0.0,
-    101480,Jacksonville State
-    University,Jacksonville,AL,1,Graduate's,Bachelor's,Public,No,6700.0,6960.0,0.54021648626144,420.0,530.0,420.0,520.0,19.0,26.0,6622.0,0.1605,0.6466,0.11800000000000001
-    101499,Jefferson Davis Community
-    College,Brewton,AL,3,Associate's,Associate's,Public,No,803.0,6173.0,,,,,,,,720.0,0.4088,0.0,0.185
-    101505,Jefferson State Community
-    College,Birmingham,AL,1,Associate's,Associate's,Public,No,3130.0,6451.0,,,,,,,,7052.0,0.2778,0.1889,0.13
-    101514,John C Calhoun State Community
-    College,Tanner,AL,1,Associate's,Associate's,Public,No,3451.0,6479.0,,,,,,,,8247.0,0.3238,0.2379,0.17300000000000001
-    101541,Judson College,Marion,AL,1,Bachelor's,Bachelor's,Private
-    Nonprofit,No,8067.0,5932.0,0.50704225352112,,,,,18.0,25.0,315.0,0.2635,0.6626,0.159
-    101569,Lawson State Community
-    College,Birmingham,AL,1,Associate's,Certificate,Public,No,1775.0,6035.0,,,,,,,,3034.0,0.3107,0.0,
-    101587,University of West
-    Alabama,Livingston,AL,1,Graduate's,Bachelor's,Public,No,8192.0,6711.0,0.28207904710341,440.0,520.0,420.0,500.0,18.0,23.0,2106.0,0.1525,0.6461,0.078
-    101602,Lurleen B Wallace Community
-    College,Andalusia,AL,1,Associate's,Associate's,Public,No,1666.0,6303.0,,,,,,,,1354.0,0.1823,0.0,
-    101648,Marion Military
-    Institute,Marion,AL,1,Associate's,Associate's,Public,No,2364.0,4647.0,0.55868544600938,530.0,630.0,540.0,640.0,19.0,26.0,444.0,0.0045,0.4706,0.107
-    101675,Miles College,Fairfield,AL,1,Bachelor's,Bachelor's,Private
-    Nonprofit,No,5300.0,4444.0,,,,,,,,1647.0,0.1503,0.9253,0.11199999999999999
-    101693,University of
-    Mobile,Mobile,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,9537.0,4938.0,0.47019423978566,460.0,560.0,450.0,540.0,20.0,25.0,1276.0,0.17600000000000002,0.7616,0.067
-    101709,University of
-    Montevallo,Montevallo,AL,1,Graduate's,Bachelor's,Public,No,8422.0,7451.0,0.64454732510288,440.0,620.0,460.0,580.0,20.0,26.0,2329.0,0.0874,0.5791,0.091
-    101736,Northwest-Shoals Community College,Muscle
-    Shoals,AL,1,Associate's,Associate's,Public,No,2422.0,4895.0,,,,,,,,2698.0,0.1959,0.2481,0.21899999999999997
-    101879,University of North
-    Alabama,Florence,AL,1,Graduate's,Bachelor's,Public,No,6997.0,7567.0,0.70219198790627,515.0,610.0,455.0,580.0,19.0,25.0,5771.0,0.1087,0.7101,0.096
-    101897,Northeast Alabama Community
-    College,Rainsville,AL,1,Associate's,Certificate,Public,No,2032.0,4898.0,,,,,,,,1983.0,0.2036,0.0,0.151
-    101912,Oakwood
-    University,Huntsville,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,12014.0,4902.0,0.4706833805095,460.0,570.0,430.0,530.0,17.0,22.0,1623.0,0.1497,0.7273,0.13699999999999998
-    101949,Alabama Southern Community
-    College,Monroeville,AL,3,Associate's,Associate's,Public,No,1467.0,6213.0,,,,,,,,765.0,0.1069,0.0,0.185
-    101994,Reid State Technical
-    College,Evergreen,AL,1,Associate's,Certificate,Public,No,1856.0,6177.0,,,,,,,,285.0,0.3342,0.0,
-    102030,Bishop State Community
-    College,Mobile,AL,1,Associate's,Certificate,Public,No,1912.0,6258.0,,,,,,,,2623.0,0.317,0.0,
-    102049,Samford
-    University,Birmingham,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,18867.0,8580.0,0.83193277310924,550.0,650.0,530.0,630.0,23.0,29.0,3364.0,0.0415,0.3245,0.019
-    102058,Selma University,Selma,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,13530.0,2900.0,,,,,,,,311.0,0.5595,0.9295,0.31
-    102067,Shelton State Community
-    College,Tuscaloosa,AL,1,Associate's,Associate's,Public,No,2496.0,4690.0,,,,,,,,4230.0,0.2123,0.0,
-    102076,Snead State Community
-    College,Boaz,AL,1,Associate's,Associate's,Public,No,2530.0,6934.0,,,,,,,,1891.0,0.2198,0.24600000000000002,0.258
-    102094,University of South
-    Alabama,Mobile,AL,1,Graduate's,Bachelor's,Public,No,9198.0,7203.0,0.8207867073584201,510.0,610.0,500.0,590.0,20.0,26.0,10712.0,0.159,0.5335,0.084
-    102234,Spring Hill College,Mobile,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,12554.0,6643.0,0.4568117977528,515.0,600.0,510.0,585.0,21.0,26.0,1375.0,0.0145,0.7581,0.062
-    102270,Stillman
-    College,Tuscaloosa,AL,1,Bachelor's,Bachelor's,Private
-    Nonprofit,No,8697.0,4641.0,0.48116338083154,,,,,,,633.0,0.1167,0.8631,0.22899999999999998
-    102298,Talladega
-    College,Talladega,AL,1,Bachelor's,Bachelor's,Private
-    Nonprofit,No,8182.0,5471.0,,,,,,,,782.0,0.1036,0.9704,0.32 102313,H
-    Councill Trenholm State Community
-    College,Montgomery,AL,1,Associate's,Certificate,Public,No,2590.0,5811.0,,,,,,,,1610.0,0.2997,0.0,
-    102368,Troy
-    University,Troy,AL,4,Graduate's,Bachelor's,Public,No,9357.0,6444.0,0.88122709379666,480.0,600.0,465.0,605.0,18.0,25.0,13634.0,0.3411,0.6182,0.10400000000000001
-    102377,Tuskegee
-    University,Tuskegee,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,15268.0,4753.0,0.50319343065693,440.0,540.0,420.0,520.0,18.0,24.0,2833.0,0.0999,0.652,0.115
-    102395,United States Sports
-    Academy,Daphne,AL,1,Graduate's,Bachelor's,Private
-    Nonprofit,No,15980.0,5732.0,,,,,,,,88.0,0.8058,0.4267,0.078
-    102429,Bevill State Community
-    College,Jasper,AL,1,Associate's,Associate's,Public,No,2122.0,6476.0,,,,,,,,3029.0,0.2283,0.0,
+    ![lines 10 through
+    60.](images/output for obtain 10 to 60 .png){width="650"}
 
 -   **For obtain the frequencies**
-
-    1 Alabama State University
-
-    1 Auburn University at Montgomery
-
-    1 H Councill Trenholm State Community College
-
-    1 Troy University-Montgomery Campus
 
 # Question 2
 
