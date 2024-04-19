@@ -19,31 +19,32 @@ Codes for Linux
 
     ```
 
--   **To read the data.**
+-   **(i) To read the data.**
 
     ```{r}
     #wget --content-disposition https://raw.githubusercontent.com/dhavalpotdar/College-Scorecard-Data-Analysis/master/MERGED_2017_2018_cleaned.csv
     ```
 
--   **To change the name of data set.**
+-   **(i) To change the name of data set.**
 
     ```{r}
     #mv MERGED_2017_2018_cleaned.csv college_score.csv
     ```
 
--   **To print the lines 10 through 60.**
+-   **(i) To print the lines 10 through 60.**
 
     ```{r}
     #head -n 60 college_score.csv | tail -n 51
     ```
 
--   **To create sub-sample of data set with appropriate conditions.**
+-   **(ii) To create sub-sample of data set with appropriate
+    conditions.**
 
     ```{r}
     #grep "Public" college_score.csv | grep ",Montgomery," > subsample.csv
     ```
 
--   **To obtain the frequencies of each cities.**
+-   **(iii) To obtain the frequencies of each cities.**
 
     ```{r}
     #cut -d ',' -f2 college_score.csv | sort | uniq -c
@@ -51,16 +52,198 @@ Codes for Linux
 
 ## Outputs for 1
 
--   **The lines 10 through 60.**
+-   **(i)The lines 10 through 60.**
 
     ![](images/output%20for%20obtain%2010%20to%2060%20.png){width="650"}
 
--   **Head of obtained frequencies of each cities.**
+-   **(iii)Head of obtained frequencies of each cities.**
 
-    ![](images/head of obtained frequencies.png){width="590"}
+    ![](images/head%20of%20obtained%20frequencies.png){width="590"}
 
 # Question 2
 
+-   **Loading necessary packages.**
+
+    ```{r message=FALSE, warning=FALSE}
+    library(dplyr)
+    library(tidyverse)
+
+    ```
+
+-   **(i) Reading the data set, assigning name as chocolate. Printing
+    first 6 rows.**
+
+    ```{r}
+    chocolate <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-18/chocolate.csv")
+    head(chocolate)
+    ```
+
+-   **(i) Examining the structure and comments.**
+
+    ```{r}
+    str(chocolate)
+    ```
+
+The data set likely contains information about chocolate products,
+including details like manufacturer, origin, ingredients,
+characteristics, and ratings.
+
+-   **(ii) Converting all the characters into factors.**
+
+    ```{r}
+    chocolate <- chocolate %>%
+      mutate_if(is.character, factor)
+    ```
+
+-   **(iii) Obtaining some statistics with respect to different company
+    locations. Printing the 10 observations. And comments.**
+
+    ```{r}
+    chocolate %>%
+      group_by(company_location) %>%
+      summarise(mean_rating = mean(rating),
+                sd_rating = sd(rating),
+                median_rating = median(rating),
+                range_rating = diff(range(rating))) %>% 
+      head(10)
+    ```
+
+If we consider 10 rows of statistics, mean ratings vary 3.1 to 3.75 ,
+standart deviatons is also vary and there are differences among
+locations. Median ratings are between 3.00 to 3.75 for this 10
+examination. And there are range ratings that varies from location to
+location between 0 to 3.
+
+-   **(iv) Finding the chocolates that its review date is equal to 2020
+    and country of bean origin is equal to Colombia.**
+
+    ```{r}
+    chocolate %>%
+      filter(review_date == 2020 & country_of_bean_origin == "Colombia")
+    ```
+
+-   **(v) Taking the mean of chocolate rating and cocoa percent
+    according to the company location.**
+
+    ```{r}
+    chocolate %>%
+      group_by(company_location) %>%
+      summarise(mean_rating = mean(rating),
+                mean_cocoa_percent = mean(as.numeric(factor(cocoa_percent))))
+    ```
+
+-   **(vi) Selecting company manufacturer, company location and country
+    of bean origin shortly. Printing the first 10 rows of the data
+    frame.** 
+
+    ```{r}
+    chocolate %>%
+     select(starts_with("c")) %>%
+      head(10)
+    ```
+
+-   **(vii) Filtering that company location in Switzerland whose rating
+    between 3.25 and 3.5. Taking the five observations.**
+
+    ```{r}
+    chocolate %>%
+      filter(company_location == "Switzerland" & rating >= 3.25 & rating <= 3.5) %>%
+      head(5)
+    ```
+
+-   **(viii) Mean of the rating column for each company locations that
+    ordered by descending.**
+
+    ```{r}
+    chocolate %>%
+      group_by(company_location) %>%
+      summarise(mean_rating = mean(rating)) %>%
+      arrange(desc(mean_rating))
+    ```
+
+-   **(ix) Counting the observations are assigned Bonnat for each
+    country of bean origin.**
+
+    ```{r}
+    chocolate %>%
+      filter(company_manufacturer == "Bonnat") %>%
+      count(country_of_bean_origin, sort = TRUE)
+    ```
+
+-   **(x) Creating a new column called Rating Percentage, which is
+    percentage version of the rating column & rating the chocolates.**
+
+    ```{r}
+    chocolate <- chocolate %>%
+      mutate(Rating_Percentage = rating / 4 * 100,
+             Class = case_when(
+               Rating_Percentage < 25 ~ "Low",
+               Rating_Percentage < 50  ~ "Medium",
+               Rating_Percentage <= 87.5 ~ "Tasty",
+               Rating_Percentage >87.5 ~ "Excellent"
+             ))
+
+    ```
+
 # Question 3
+
+-   **Calling necessary libraries.**
+
+    ```{r message=FALSE, warning=FALSE}
+    library(ggplot2)
+    library(dplyr)
+    library(tidyverse)
+    ```
+
+-   **(i) Reading data and named it as nmmaps.**
+
+    ```{r}
+    nmmaps<-read.csv("https://www.cedricscherer.com/data/chicago-nmmaps-custom.csv")
+
+    ```
+
+-   **(i)Examining the relationship between date and temp based on the
+    year.**
+
+    ```{r message=FALSE, warning=FALSE}
+    ggplot(nmmaps,aes(as.Date(date),temp,color="red"))+
+      geom_point()+
+      labs(x = "Year", y = "Temperature",
+           title = "Relationship between Date & Temperature based on Year")+
+      facet_wrap(~year, labeller = label_both)
+    ```
+
+-   **Interpretation for plot 1.**
+
+-   **(ii) Factoring season variables.**
+
+    ```{r}
+    nmmaps$season<-factor(nmmaps$season,labels = c("Autumn", "Spring", "Summer", "Winter"))
+
+    ```
+
+-   **(ii) Examining the relationship between date, temp and season.**
+
+    ```{r}
+    ggplot(nmmaps,aes(as.Date(date),temp,color=season))+
+      geom_point()+
+      labs(x = "Year", y = "Temperature", title = "Relationship between Date, Temperature, and Season" )
+    ```
+
+-   **Interpretation for plot 2.**
+
+-   **(iii) The relationship between temperature and dewpoint, and the
+    correlation.**
+
+    ```{r message=FALSE, warning=FALSE}
+    ggplot(nmmaps,aes(temp,dewpoint))+
+      geom_point()+
+      labs(x = "Temperature", 
+           y = "Dewpoint",
+           title = "Temperature vs Dewpoint") +
+      geom_smooth(method="lm")
+    ```
+
+-   **Interpretation for plot 3.**
 
 # Question 4
