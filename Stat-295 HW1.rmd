@@ -208,12 +208,18 @@ location between 0 to 3.
     ```{r message=FALSE, warning=FALSE}
     ggplot(nmmaps,aes(as.Date(date),temp,color="red"))+
       geom_point()+
-      labs(x = "Year", y = "Temperature",
+      labs(x = "Year", y = "Temperature(°F)",
            title = "Relationship between Date & Temperature based on Year")+
       facet_wrap(~year, labeller = label_both)
     ```
 
 -   **Interpretation for plot 1.**
+
+    Although there are no major changes in general, temperatures in the
+    last months of the year have started to decrease over the years. The
+    lowest temperature was reached in early 1997, and the highest
+    temperature was reached in mid-1999. In general, the temperature
+    first increased and then decreased within a year.
 
 -   **(ii) Factoring season variables.**
 
@@ -227,10 +233,15 @@ location between 0 to 3.
     ```{r}
     ggplot(nmmaps,aes(as.Date(date),temp,color=season))+
       geom_point()+
-      labs(x = "Year", y = "Temperature", title = "Relationship between Date, Temperature, and Season" )
+      labs(x = "Year", y = "Temperature(°F)", title = "Relationship between Date, Temperature, and Season" )
     ```
 
 -   **Interpretation for plot 2.**
+
+    The temperature change generally followed a regular pattern.
+    Temperature change was more vary in winter and autumn. As we see in
+    the first graph, the temperature reached its lowest value at the
+    beginning of 1997 and its peak in the middle of 1999.
 
 -   **(iii) The relationship between temperature and dewpoint, and the
     correlation.**
@@ -238,7 +249,7 @@ location between 0 to 3.
     ```{r message=FALSE, warning=FALSE}
     ggplot(nmmaps,aes(temp,dewpoint))+
       geom_point()+
-      labs(x = "Temperature", 
+      labs(x = "Temperature(°F)", 
            y = "Dewpoint",
            title = "Temperature vs Dewpoint") +
       geom_smooth(method="lm")
@@ -246,6 +257,107 @@ location between 0 to 3.
 
 -   **Interpretation for plot 3.**
 
+    In this graph we observe the relationship between temperature and
+    dewpoint. There is a strong linear relationship between temperature
+    and dewpoint with small deviations. Simply we can conclude that the
+    dewpoint increases as the temperature increases.
+
 # Question 4
 
--   
+-   In this part, we tried to fetch earthquake data from the Terremoti
+    website, analyzed the data, categorized the earthquakes into
+    different classes based on their magnitudes, and visualized it on a
+    Leaflet map.
+
+<!-- -->
+
+-   **Calling necessary libraries.**
+
+    ```{r message=FALSE, warning=FALSE ,results = FALSE}
+    libraries <- c("ggplot2","sf","rworldmap","tidyverse","magrittr",
+                   "leaflet", "dplyr", "rvest", "xml2","rvest",
+                   "maps","mapdata","RgoogleMaps","lubridate","rnaturalearth","dplyr","rnaturalearthdata","RColorBrewer","httr")
+    lapply(libraries, require, character.only = TRUE)
+    ```
+
+-   **Scraping data from web.**
+
+    ```{r}
+    url <-"https://terremoti.ingv.it/en/events?starttime=2024-04-12%2B00%253A00%253A00&endtime=2024-04-19%2B23%253A59%253A59&last_nd=7&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=-90&maxlat=90&minlon=-180&maxlon=180&minversion=100&limit=30&orderby=mag-asc&lat=0&lon=0&maxradiuskm=-1&wheretype=area&box_search=Mondo&timezone=UTC&page=2"
+    res <- GET(url)
+    html_con <- content(res, "text")
+    ```
+
+-   **Reading the html content.**
+
+    ```{r}
+    html_data <- read_html(html_con)
+    ```
+
+    ```{r}
+    tables <- html_data %>%
+      html_nodes("table") %>%
+      html_table()
+    ```
+
+    ```{r}
+    earthquake <- as.data.frame(tables)
+    str(earthquake)
+    ```
+
+-   **Removing non-numeric characters from the Magnitude column and
+    converting it to numeric.**
+
+    ```{r}
+    earthquake$Magnitude <- as.numeric(gsub("[^0-9.]", "", earthquake$Magnitude))
+    ```
+
+-   **Adding a new column Class based on earthquake magnitudes,
+    categorizing them as "Minor","Light",and"Major".**
+
+    ```{r}
+    earthquake <- earthquake %>%
+      mutate(Class = ifelse(Magnitude < 3, "Minor",
+                            ifelse(Magnitude<=3.7, "Light","Major")))
+    ```
+
+-   **Defining colors for different earthquake classes.**
+
+    ```{r}
+    colors <- c("yellow","orange3", "darkred")
+    color_vector <- colorFactor(colors, levels = c("Minor","Light","Major"))
+    ```
+
+-   **Creating Leaflet map. (Please click the circles to open popups.)**
+
+    ```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+    leaflet() %>%
+      addTiles() %>%
+      addCircles(data = earthquake,
+                 ~Longitude, ~Latitude,
+                 weight = 30,
+                 radius = 100,
+                 popup = paste0(
+                   "<b>Date: </b>", earthquake$Origin.time..UTC.,
+                   "<br>",
+                   "<b>Place: </b>", earthquake$Region,
+                   "<br>",
+                   "<b>Depth in km: </b>", earthquake$Depth,
+                   "<br>",
+                   "<b>Magnitude: </b>", earthquake$Magnitude),
+                 label = ~Region,
+                 color = ~color_vector(Class)) %>%
+      setView(lng = median(earthquake$Longitude),
+              lat = median(earthquake$Latitude),
+              zoom = 5)
+    ```
+
+------------------------------------------------------------------------
+
+**End Of The Work.**
+
+Note: Dear teacher, even though we used resources on the internet when
+we got stuck while answering the questions, our goal for each question
+was to learn, and it was a very educational assignment for us. Thank
+you, have a good day.
